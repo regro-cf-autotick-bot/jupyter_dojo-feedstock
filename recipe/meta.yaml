@@ -5,11 +5,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/j/jupyter_dojo/jupyter_dojo-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/j/jupyter_dojo/jupyter_dojo-{{ version }}.tar.gz
   sha256: a473ba827fcbf8f99c86373c7863b95e308ecc9c9efafe1ddd4180310efcaa8e
 
 build:
-  number: 1
+  number: 2
   noarch: python
   script:
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
@@ -17,24 +17,27 @@ build:
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}
     - pip
     - ipython_unittest >=0.3
     - notebook >=4.3
     - jupyter
   run:
-    - python
+    - python >={{ python_min }}
     - notebook >=4.3
     - jupyter
     - ipython_unittest
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - jupyter_dojo
 
 about:
   home: https://github.com/JoaoFelipe/ipython-unittest
   license: MIT
+  license_file: LICENSE
   license_family: MIT
   summary: 'Install the coding dojo extension for ipython_unittest'
   dev_url: https://github.com/JoaoFelipe/ipython-unittest
