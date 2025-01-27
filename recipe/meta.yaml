@@ -12,12 +12,13 @@ build:
   number: 2
   noarch: python
   script:
-    - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     - jupyter nbextension install jupyter_dojo --py --sys-prefix --overwrite
 
 requirements:
   host:
     - python {{ python_min }}
+    - setuptools
     - pip
     - ipython_unittest >=0.3
     - notebook >=4.3
